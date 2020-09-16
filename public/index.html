@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sun's Radius</title>
+  <style>
+    body{
+      font-family: Courier New;
+      padding: 50px;
+    }
+    p{
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>Latest Calculated PI</h1>
+    <button onclick="getLatestPI()">Get Latest Calculated PI</button>
+    <br>
+    <br>
+    <strong id="calculation-info"></strong>
+    <p id="pi"></p>
+  </div>
+  <div>
+    <h1>Sun's Radius</h1>
+    <button onclick="getSunCircumference()">Get Sun's Circumference</button>
+    <p id="sun"></p>
+    <br>
+    <br>
+    <br>
+    <br>
+  </div>
+  <script>
+    function getLatestPI() {
+      fetch('http://localhost:3000/pi')
+        .then(response => response.json())
+        .then(data => {
+          document.querySelector("#calculation-info").innerHTML = `Calculation time: ${data.calculationTime}, Iteration: ${data.iteration}`;
+          document.querySelector("#pi").innerHTML = data.pi;
+        });
+    }
+    function getSunCircumference(){
+      fetch('http://localhost:3000/sun')
+        .then(response => response.json())
+        .then(data => {
+          document.querySelector("#sun").innerHTML = data.circumference;
+        });
+    }
+  </script>
+</body>
+</html>
